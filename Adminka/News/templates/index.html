@@ -46,15 +46,30 @@
 
             {% for item in news %}
         <div class="card 3">
+            {{ forloop.counter }}
         Категория {{ item.category}}
-        <div class="card-body">
-         <h5 class="card-title">{{ item.title }}</h5>
-        <p class="card-text">{{ item.content}}.</p>
+            <div class="media" style="display:flex">
+                <div class="media-photo">
+                    {% if item.photo %}
+                    <img src="{{ item.photo.url }}" class="mr-3" width="350" alt="Фото">
+                    {% else %}
+                    <h6>Фото нет</h6>
+                    {% endif %}
+                </div>
+                <div class="media-body">
+                     <h5 class="card-title {% cycle 'text-success' 'text-danger' 'text-primary' %}">{{ item.title }}</h5>
+                {% autoescape off %}
+            <p class="card-text">{{ item.content|truncatewords:60|linebreaks }}</p>
+                {% endautoescape %}
         <a href="#" class="btn btn-primary">Редактировать</a>
         </div>
         <div class="card-footer text-muted">
            {{ item.created_at|date:'d-m-Y H:i' }}
         </div>
+                </div>
+        </div>
+        <div class="card-body">
+
         </div>
             {% endfor %}
             </div>
