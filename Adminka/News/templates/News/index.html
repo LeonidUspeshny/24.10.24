@@ -1,61 +1,21 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ title }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'Home' %}">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'Home' %}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'Home' %}">Добавить новость</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Лапушкина Лавка</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Доп. ссылки
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Jenkins</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+{% extends 'base.html' %}
 
-    <div class="container mt-3">
-        <h1>{{ title }}</h1>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="list-group">
-                    {% for cat in categories %}
-                    <a href="{% url 'Category' cat.id %}" class="list-group-item list-group-item-action">{{ cat.title }}</a>
-                    {%  endfor %}
-                </div>
+{% block title %}
+    {{ title }} :: {{ block.super }}
+{% endblock %}
 
-            </div>
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
 
-            <div class="col-md-8">
+{% block content %}
             {% for item in news %}
-        <div class="card mb-3">
+    <div class="card mb-3">
             {{ forloop.counter }}
-        Категория {{ item.category}}
+        <div class="card-header">
+            Категория: <a href="{% url 'Category' item.category.pk %}"> {{ item.category}} </a>
+        </div>
+
             <div class="media" style="display:flex">
                 <div class="media-photo">
                     {% if item.photo %}
@@ -64,27 +24,20 @@
                     <h6>Фото нет</h6>
                     {% endif %}
                 </div>
-                <div class="media-body">
-                     <h5 class="card-title {% cycle 'text-success' 'text-danger' 'text-primary' %}">{{ item.title }}</h5>
-                {% autoescape off %}
-            <p class="card-text">{{ item.content|truncatewords:60|linebreaks }}</p>
-                {% endautoescape %}
-        <a href="#" class="btn btn-primary">Редактировать</a>
-        </div>
-        <div class="card-footer text-muted">
-           {{ item.created_at|date:'d-m-Y H:i' }}
-        </div>
-                </div>
-        </div>
-        <div class="card-body">
-            {% endfor %}
-        </div>
+                    <div class="media-body">
+                        <h5 class="card-title {% cycle 'text-success' 'text-danger' 'text-primary' %}">{{ item.title }}</h5>
+                        {% autoescape off %}
+                        <p class="card-text">{{ item.content|truncatewords:60|linebreaks }}</p>
+                        {% endautoescape %}
+                        <a href="#" class="btn btn-primary">Редактировать</a>
+                    </div>
+                        <div class="card-footer text-muted">
+                            {{ item.created_at|date:'d-m-Y H:i' }}
+                        </div>
             </div>
-        </div>
     </div>
+                            <div class="card-body">
+                                {% endfor %}
+                            </div>
+{% endblock %}
 
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
-</html>
