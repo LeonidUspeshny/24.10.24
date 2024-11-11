@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView
+from .utils import MyMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import News, Category
 from .forms import NewsForm
 
 
-class HomeNews(ListView):
+class HomeNews(ListView, MyMixin):
     model = News
     context_object_name = 'news'
     template_name = 'News/home_news_list.html'
@@ -42,6 +44,7 @@ class ViewNews(DetailView):
 class AddNews(CreateView):
     form_class = NewsForm
     template_name = 'News/add_news.html'
+    login_url = '/admin/'
 
 # def index(request):
 #     news = News.objects.all()
