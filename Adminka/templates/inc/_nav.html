@@ -13,7 +13,6 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'Add_news' %}">Добавить новость</a>
         </li>
-        {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="https://www.llavka.ru">Лапушкина Лавка</a>
         </li>
@@ -25,9 +24,13 @@
             <li><a class="dropdown-item" href="http://79.98.142.114:8080">Jenkins</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
+            {% endif %}
           </ul>
         </li>
       </ul>
     </div>
   </div>
+   <span class="navbar-text" style="margin-right: 20px; display: flex;">
+     <a href="{% url 'Register' %}">Регистрация</a> | <a href="{% url 'Login' %}">Логин</a>
+   </span>
 </nav>
