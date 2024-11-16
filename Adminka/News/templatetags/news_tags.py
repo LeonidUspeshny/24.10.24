@@ -1,6 +1,7 @@
-from django.db.models import Count, F
 from News.models import Category
 from django import template
+from django.db.models import Count, F
+
 
 register = template.Library()
 

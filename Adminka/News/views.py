@@ -7,9 +7,9 @@ from django.core.paginator import Paginator
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
 
+
 from .models import News, Category
 from .forms import NewsForm, UserRegisterForm, UserLoginForm
-
 
 
 def register (request):
@@ -43,6 +43,7 @@ def user_logout(request):
     logout(request)
     return redirect('Login')
 
+
 class HomeNews(ListView, MyMixin):
     model = News
     context_object_name = 'news'
@@ -59,7 +60,7 @@ class HomeNews(ListView, MyMixin):
         return News.objects.filter(is_published=True).select_related('category')
 
 
-class NewsByCategory(ListView):
+class NewsByCategory(ListView, MyMixin):
     model = News
     template_name = 'News/home_news_list.html'
     context_object_name = 'news'
@@ -113,13 +114,13 @@ class AddNews(CreateView):
 #     }
 #     return render(request, 'News/category.html', context=context)
 
-# def view_news(request, news_id):
-#     # news_item = News.objects.get(pk=news_id)
-#     news_item = get_object_or_404(News, pk=news_id)
-#     context = {
-#         'news_item': news_item
-#     }
-#     return render(request, 'news/view_news.html', context=context)
+def view_news(request, news_id):
+    # news_item = News.objects.get(pk=news_id)
+    news_item = get_object_or_404(News, pk=news_id)
+    context = {
+        'news_item': news_item
+    }
+    return render(request, 'news/view_news.html', context=context)
 
 
 # def add_news(request):

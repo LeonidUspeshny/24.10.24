@@ -10,12 +10,12 @@
 
 {% block content %}
  <h1>Добавление новости</h1>
-<form action="{% url 'Add_news' %}" method="post" style="width: 1200px;">
-  {% csrf_token %}
-  {{ form.as_p }}
-      <button type="submit" class="btn btn-primary btn-block">Добавить</button>
-  {{ form.none_field.errors }}
-</form>
+    <form action="{% url 'Add_news' %}" method="post" style="width: 1200px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary btn-block">Добавить</button>
+    {{ form.none_field.errors }}
+    </form>
 <!--  <form>-->
 <!--  <div class="form-group">-->
 <!--    <label for="{{ form.title.id_for_lable }}" class="form-label">Заголовок:</label>-->
