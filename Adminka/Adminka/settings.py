@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$6s0+@*#hot(0mxru6*5pc&%xrt7!*rx^&f=kvqf0xp!c1+5_!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -58,7 +58,7 @@ MIDDLEWARE = [
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
-INTERNAL_IPS = [ "127.0.0.1", "79.98.142.114:9000" ]
+INTERNAL_IPS = [ "*" ]
 
 ROOT_URLCONF = 'Adminka.urls'
 
