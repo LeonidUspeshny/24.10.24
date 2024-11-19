@@ -120,7 +120,7 @@ def view_news(request, news_id):
     context = {
         'news_item': news_item
     }
-    return render(request, 'news/view_news.html', context=context)
+    return render(request, 'News/view_news.html', context=context)
 
 
 # def add_news(request):
